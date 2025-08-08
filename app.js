@@ -17,7 +17,6 @@ const passport = require('./config/passport');
 const indexRouter = require("./routes/index");
 const signUpRouter = require("./routes/signUp");
 
-
 // App initialization
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -32,7 +31,7 @@ app.use(
     cookie: {
       maxAge: 7 * 24 * 60 * 60 * 1000 // ms
     },
-    secret: 'a santa at nasa',
+    secret: process.env.SECRET_SESSION,
     resave: true,
     saveUninitialized: true,
     store: new PrismaSessionStore(
@@ -63,13 +62,12 @@ app.use(express.static(assetsPath));
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 
-
 // Authentication routes
 app.post("/log-in",
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/",
-    failureFlash: "Sample Error!"
+    failureFlash: "Invalid Credentials",
   })
 );
 
