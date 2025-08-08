@@ -16,6 +16,8 @@ const pool = require('./db/pool');
 
 // Route imports
 const indexRouter = require("./routes/index");
+const signUpRouter = require("./routes/signUp");
+
 
 // App initialization
 const app = express();
@@ -51,6 +53,8 @@ app.use(express.static(assetsPath));
 
 // Route handlers
 app.use("/", indexRouter);
+app.use("/sign-up", signUpRouter);
+
 
 // Authentication routes
 app.post("/log-in",
