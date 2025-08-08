@@ -2,7 +2,38 @@
 
 <main>
     <div class="container">
-        <h1>Welcome <%= locals.user.firstName %> </h1>
+        <% if(locals.user) { %> 
+        <h1>Welcome <%= locals.user.fullName %> </h1>
+        <% } else { %>
+        
+        <form action="/log-in" method="POST">
+        <h1 class="form-heading">Log In</h1>
+
+        <div class="input-group">
+            <label for="email" value="<% typeof email  !== "undefined" ? email : '' %>">Email</label>
+            <input name="email" id="email" type="email"  placeholder="condoriano@onepiece.me">
+        </div>
+    
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input name="password" id="password" type="password">
+        </div>
+        
+        <button class="submit-btn" type="submit">Log In</button>
+        <p class="signup">Don't have an account?
+            <a rel="noopener noreferrer" href="/sign-up">Sign up</a>
+         </p>
+
+        <% if (errorList.error && errorList.error.length > 0) { %>
+                <ul class="errors">
+                  <% errorList.error.forEach(function(message) { %>
+                  <li class="error"><%= message %></li>
+                  <% }); %>
+                  </ul>
+            <% } %>
+    </form>
+        <% } %>
+        
     </div>
 </main>
 
