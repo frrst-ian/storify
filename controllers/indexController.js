@@ -2,7 +2,7 @@ async function getIndex(req, res) {
     try {
         res.render("index", {
             user: req.user,
-            messages: req.flash()
+            errorList: req.flash()
         });
     } catch (error) {
         console.error("Index page error:", error);
