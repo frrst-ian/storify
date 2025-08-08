@@ -1,8 +1,8 @@
-const {Router} = require("express");
+const { Router } = require("express");
 const signUpRouter = Router();
 const signUpController = require("../controllers/signUpController");
 
-signUpRouter.get("/" , signUpRouter.getSignUp);
-signUpRouter.post("/" , signUpRouter.postSignUp);
+signUpRouter.get("/", signUpController.getSignUpForm);
+signUpRouter.post("/", signUpController.postSignUpForm);
 
 module.exports = signUpRouter
