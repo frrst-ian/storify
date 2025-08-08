@@ -9,10 +9,18 @@ datasource db {
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
-  email     String @unique
-  firstName String
-  lastName  String
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
+  fullName String
+  password String
+  sessions Session[]
 }
 
-
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String   @db.Text
+  expiresAt DateTime
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+}
