@@ -5,14 +5,13 @@ require('dotenv').config();
 const express = require("express");
 const path = require("node:path");
 const session = require("express-session");
-const pgSession = require('connect-pg-simple')(session);
 const flash = require('connect-flash');
+const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
+const { PrismaClient } = require('./generated/prisma');
 
 // Authentication
 const passport = require('./config/passport');
 
-// Database
-const pool = require('./db/pool');
 
 // Route imports
 const indexRouter = require("./routes/index");
@@ -28,15 +27,24 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 // Session configuration with PostgreSQL store
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  store: new pgSession({
-    pool: pool,
-    createTableIfMissing: true
+app.use(
+  session({
+    cookie: {
+      maxAge: 7 * 24 * 60 * 60 * 1000 // ms
+    },
+    secret: 'a santa at nasa',
+    resave: true,
+    saveUninitialized: true,
+    store: new PrismaSessionStore(
+      new PrismaClient(),
+      {
+        checkPeriod: 2 * 60 * 1000,  //ms
+        dbRecordIdIsSessionId: true,
+        dbRecordIdFunction: undefined,
+      }
+    )
   })
-}));
+);
 
 // Passport middleware 
 app.use(passport.session());
