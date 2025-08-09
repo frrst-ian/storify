@@ -1,0 +1,22 @@
+<%- include("./partials/header") %>
+
+<div class="form-container">
+    <form action="/upload" method="POST" enctype="multipart/form-data"> 
+
+        <h1 class="form-heading">Upload File</h1>
+        <div class="input-group">
+            <label for="file" value="<% typeof file  !== "undefined" ? file : '' %>">File</label>
+            <input name="file" id="file" type="file"  >
+        </div>
+
+        <button class="submit-btn" type="submit">Upload</button>
+        <a href="/" class="cancel-btn">Cancel</a>
+        <% if(typeof errorList !== 'undefined' && errorList.length > 0) {%>
+            <ul class="error-msgs">
+                <% errorList.forEach(e => { %>
+                    <li><%=e.msg%></li>
+               <% }) %>
+            </ul>
+            <% } %>
+    </form>
+</div>
