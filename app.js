@@ -16,6 +16,8 @@ const passport = require('./config/passport');
 // Route imports
 const indexRouter = require("./routes/index");
 const signUpRouter = require("./routes/signUp");
+const uploadFileRouter = require("./routes/uploadFile");
+
 
 // App initialization
 const app = express();
@@ -61,6 +63,7 @@ app.use(express.static(assetsPath));
 // Route handlers
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
+app.use("/upload", uploadFileRouter)
 
 // Authentication routes
 app.post("/log-in",
