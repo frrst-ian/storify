@@ -3,6 +3,9 @@
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/log-out">Logout</a></li>
+            <% if(locals.user){ %>
+                <li><a href="/upload">Upload</a></li>
+           <% } %>
         </ul>
     </div>
 </nav>
