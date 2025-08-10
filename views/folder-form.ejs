@@ -1,0 +1,24 @@
+<%- include("./partials/header") %>
+
+<div class="form-container">
+    <form action="/folder" method="POST" > 
+
+        <h1 class="form-heading">Create Folder</h1>
+        <div class="input-group">
+            <label for="folderName">Folder Name</label>
+            <input name="folderName" id="folderName" type="text" 
+             value="<% typeof folderName  !== "undefined" ? folderName : '' %>" />
+        </div>
+
+        <button class="submit-btn" type="submit">Create Folder</button>
+        <a href="/" class="cancel-btn">Cancel</a>
+        
+        <% if(typeof errorList !== 'undefined' && errorList.length > 0) {%>
+            <ul class="error-msgs">
+                <% errorList.forEach(e => { %>
+                    <li><%=e.msg%></li>
+               <% }) %>
+            </ul>
+            <% } %>
+    </form>
+</div>

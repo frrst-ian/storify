@@ -3,7 +3,20 @@
 <main>
     <div class="container">
         <% if(locals.user) { %> 
-        <h1>Welcome <%= locals.user.fullName %> </h1>
+        <h1>Welcome to Storify <%= locals.user.fullName %> </h1>
+            <% if(folders.length === 0 && filesWithoutFolder.length === 0) {%>
+                <p>No files or Folders Exist</p>
+                <% } %>
+        <div class="files-containers">
+            <% folders.forEach(folder => {%>
+                <p> <%= folder.name %> </p>
+           <%  }); %>
+            <% filesWithoutFolder.forEach(file => {%>
+                <p><%= file.name %> </p>
+            <%  }); %>
+        </div>
+
+        <!-- Login Form -->
         <% } else { %>
         
         <form action="/log-in" method="POST">
