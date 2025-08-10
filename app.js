@@ -18,6 +18,7 @@ const indexRouter = require("./routes/index");
 const signUpRouter = require("./routes/signUp");
 const uploadFileRouter = require("./routes/uploadFile");
 const createFolderRouter = require("./routes/createFolder");
+const downloadFileRouter = require("./routes/downloadFile")
 
 
 // App initialization
@@ -65,7 +66,8 @@ app.use(express.static(assetsPath));
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/upload", uploadFileRouter);
-app.use("/folder", createFolderRouter)
+app.use("/folder", createFolderRouter);
+app.use("/download" , downloadFileRouter);
 
 // Authentication routes
 app.post("/log-in",

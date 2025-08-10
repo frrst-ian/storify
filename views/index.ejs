@@ -13,6 +13,7 @@
            <%  }); %>
             <% filesWithoutFolder.forEach(file => {%>
                 <p><%= file.name %> </p>
+                <a href="/download/<%=file.id%>">Download</a>
             <%  }); %>
         </div>
 
