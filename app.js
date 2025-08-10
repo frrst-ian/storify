@@ -17,6 +17,7 @@ const passport = require('./config/passport');
 const indexRouter = require("./routes/index");
 const signUpRouter = require("./routes/signUp");
 const uploadFileRouter = require("./routes/uploadFile");
+const createFolderRouter = require("./routes/createFolder");
 
 
 // App initialization
@@ -63,7 +64,8 @@ app.use(express.static(assetsPath));
 // Route handlers
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
-app.use("/upload", uploadFileRouter)
+app.use("/upload", uploadFileRouter);
+app.use("/folder", createFolderRouter)
 
 // Authentication routes
 app.post("/log-in",
