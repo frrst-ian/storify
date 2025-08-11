@@ -7,6 +7,8 @@
                 <p>No Files Exist</p>
                 <% } %>
                 <a href="/folder/<%= folder.id %>/upload">Upload to Folder</a>
+                <a href="/folder/<%=`${folder.id}/edit`%>">Edit Folder</a>
+
         <h2><%= folder.name %></h2> 
 
         <a href="/" class="back-btn">Back</a>
