@@ -9,7 +9,7 @@
                 <% } %>
         <div class="files-containers">
             <% folders.forEach(folder => {%>
-                <p> <%= folder.name %> </p>
+                <a href="/folder/<%= folder.id %>"><%= folder.name %> </a>
            <%  }); %>
             <% filesWithoutFolder.forEach(file => {%>
                 <p><%= file.name %> </p>

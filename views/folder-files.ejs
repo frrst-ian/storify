@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+<main>
+    <div class="container">
+        <% if(locals.user) { %> 
+            <% if( filesInFolder.length === 0) {%>
+                <p>No Files Exist</p>
+                <% } %>
+                <a href="/folder/<%= folder.id %>/upload">Upload to Folder</a>
+        <h2><%= folder.name %></h2> 
+
+        <a href="/" class="back-btn">Back</a>
+        <div class="files-containers">
+            <% filesInFolder.forEach(f => { %> 
+                <p><%= f.name %> </p>
+                <a href="/download/<%= f.id %>">Download</a>
+             <%}); %>
+        </div>
+        <% } %>
+    </div>
+</main>
+
+<%- include('partials/footer') %>
+</body>
+</html>

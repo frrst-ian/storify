@@ -1,7 +1,7 @@
 <%- include("./partials/header") %>
 
 <div class="form-container">
-    <form action="/upload" method="POST" enctype="multipart/form-data"> 
+    <form action="<%= folderId ? `/folder/${folderId}/upload` : '/upload' %>" method="POST" enctype="multipart/form-data"> 
 
         <h1 class="form-heading">Upload File</h1>
         <div class="input-group">
