@@ -110,6 +110,17 @@ async function updateFolderName(name, folderId) {
     })
 }
 
+async function updateFileName(name, fileId) {
+    return await db.file.update({
+        data: {
+            name: name
+        },
+        where: {
+            id: fileId,
+        }
+    })
+}
+
 async function updateFileFolder(folderId, fileId) {
     return await db.file.update({
         data: {
@@ -127,10 +138,7 @@ async function deleteFolder(folderId) {
             id: folderId,
         }
     })
-}
-
-
-
+} 
 
 async function deleteFile(fileId) {
     return await db.file.delete({
@@ -144,5 +152,5 @@ async function deleteFile(fileId) {
 module.exports = {
     createUser, getUserById, getUserByEmail, createFile, createFolder, getFolders, getFiles,
     getFolderById, getFileById, getFilesWithoutFolder, updateFileFolder, updateFolderName, getFilesInFolder,
-    deleteFile, deleteFolder
+    deleteFile, deleteFolder, updateFileName
 };

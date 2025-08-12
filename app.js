@@ -19,6 +19,7 @@ const uploadFileRouter = require("./routes/uploadFile");
 const createFolderRouter = require("./routes/createFolder");
 const downloadFileRouter = require("./routes/downloadFile");
 const folderRouter = require("./routes/folder");
+const fileRouter = require("./routes/file");
 
 // App initialization
 const app = express();
@@ -68,6 +69,7 @@ app.use("/upload", uploadFileRouter);
 app.use("/create-folder", createFolderRouter);
 app.use("/download" , downloadFileRouter);
 app.use("/folder" , folderRouter);
+app.use("/file" , fileRouter);
 
 // Authentication routes
 app.post("/log-in",

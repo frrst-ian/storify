@@ -14,6 +14,7 @@
             <% filesWithoutFolder.forEach(file => {%>
                 <p><%= file.name %> </p>
                 <a href="/download/<%=file.id%>">Download</a>
+                <a href="/file/<%= file.id %>/rename">Rename File</a>
             <%  }); %>
              <% if (errorList.success && errorList.success.length > 0) { %>
                 <ul class="success-msgs">

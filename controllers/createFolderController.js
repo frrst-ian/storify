@@ -17,8 +17,6 @@ async function postFolderForm(req, res) {
     const userId = req.user.id;
     const folderName = req.body.folderName;
 
-    console.log("Folder name: ", folderName)
-
     if (!errors.isEmpty()) {
         return res.status(400).render("folder-form", {
             errorList: errors.array(),
