@@ -15,6 +15,13 @@
                 <p><%= file.name %> </p>
                 <a href="/download/<%=file.id%>">Download</a>
             <%  }); %>
+             <% if (errorList.success && errorList.success.length > 0) { %>
+                <ul class="success-msgs">
+                  <% errorList.success.forEach(function(message) { %>
+                    <li class="success"><%= message %></li>
+                    <% }); %>
+                </ul>
+        <% } %>
         </div>
 
         <!-- Login Form -->
