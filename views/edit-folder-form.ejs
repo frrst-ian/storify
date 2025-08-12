@@ -7,7 +7,7 @@
         <div class="input-group">
             <label for="folderName">Folder Name</label>
             <input name="folderName" id="folderName" type="text" 
-             value="<% typeof folderName  !== "undefined" ? folderName : '' %>" />
+             value="<%=  folderName || '' %>" />
         </div>
 
         <button class="submit-btn" type="submit">Submit</button>
