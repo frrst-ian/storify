@@ -19,6 +19,9 @@ async function getRenameFileForm(req, res) {
                 fileName: file.name,
                 fileId
             })
+        } else {
+            req.flash("error", "Permission denied");
+            return res.status(401).redirect("/");
         }
     } catch (error) {
         console.error(error);
@@ -32,17 +35,17 @@ async function postRenameFileForm(req, res) {
     const fileName = req.body.fileName;
     const fileId = parseInt(req.params.fileId);
 
-    if(!errors.isEmpty()){
+    if (!errors.isEmpty()) {
         return res.status(400).render("file-rename-form", {
-            errorList : errors.array(),
-            title:"Rename File",
+            errorList: errors.array(),
+            title: "Rename File",
             fileName,
             fileId
         })
     }
 
     try {
-        await db.updateFileName(fileName,fileId);
+        await db.updateFileName(fileName, fileId);
         res.redirect("/")
     } catch (err) {
         console.error(err);
@@ -55,4 +58,29 @@ async function postRenameFileForm(req, res) {
     }
 }
 
-module.exports = { getRenameFileForm, postRenameFileForm };
+async function postDeleteFileForm(req, res) {
+    const fileId = parseInt(req.params.fileId);
+    const userId = req.user.id;
+
+    try {
+        const file = await db.getFileById(fileId);
+        if (file === null) {
+            req.flash("error", "File doesn't exist");
+            return res.status(404).redirect("/")
+        }
+
+        if (file.userId === userId) {
+            await db.deleteFile(fileId);
+            req.flash("success", "File deleted");
+            res.redirect("/");
+        } else {
+            req.flash("error", "Permission denied");
+            return res.status(401).redirect("/");
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send(err);
+    }
+}
+
+module.exports = { getRenameFileForm, postRenameFileForm, postDeleteFileForm };
