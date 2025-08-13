@@ -34,6 +34,7 @@ async function createFolder(id, name) {
         }
     })
 }
+
 async function createFile(id, name, fileType, url, size, folderId) {
     return await db.file.create({
         data: {
@@ -138,7 +139,7 @@ async function deleteFolder(folderId) {
             id: folderId,
         }
     })
-} 
+}
 
 async function deleteFile(fileId) {
     return await db.file.delete({
@@ -147,7 +148,6 @@ async function deleteFile(fileId) {
         }
     })
 }
-
 
 module.exports = {
     createUser, getUserById, getUserByEmail, createFile, createFolder, getFolders, getFiles,

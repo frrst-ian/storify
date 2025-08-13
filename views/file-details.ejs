@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+
+<main>
+    <div class="container">
+        <% if(locals.user) { %> 
+            <p>File Name: <%=fileName%></p>
+            <p>File Size: <%=fileSize%> MB</p>
+            <p>File Type: <%=fileType%></p>
+            <p>Created At: <%=fileUploadDate%></p>
+            <a href="/">Back</a>
+            <a href="/download/<%=file.id%>">Download</a>
+        <% } %>
+    </div>
+</main>
+
+<%- include('partials/footer') %>
+</body>
+</html>

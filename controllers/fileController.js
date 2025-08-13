@@ -83,4 +83,38 @@ async function postDeleteFileForm(req, res) {
     }
 }
 
-module.exports = { getRenameFileForm, postRenameFileForm, postDeleteFileForm };
+async function getFileDetailsHandler(req, res) {
+    const fileId = parseInt(req.params.fileId);
+    const userId = req.user.id
+    const title = "File Details";
+    try {
+        const file = await db.getFileById(fileId);
+        if (file === null) {
+            req.flash("error", "File doesn't exist");
+            return res.status(404).redirect("/");
+        }
+
+        const formatFileSize =( Number(file.size) / 1048576).toFixed(2);
+        const date = file.createdAt;
+        const formatDate = date.toDateString();
+        if (file.userId === userId) {
+            res.render("file-details", {
+                title: title,
+                fileName: file.name,
+                fileSize: formatFileSize,
+                fileUploadDate: formatDate,
+                fileType: file.fileType,
+                user: req.user,
+                file: file
+            })
+        } else {
+            req.flash("error", "Permission denied");
+            return res.status(401).redirect("/");
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
+}
+
+module.exports = { getRenameFileForm, postRenameFileForm, postDeleteFileForm, getFileDetailsHandler };
