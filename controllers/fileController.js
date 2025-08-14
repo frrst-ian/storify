@@ -2,7 +2,6 @@ const db = require("../db/queries");
 const { validationResult } = require("express-validator");
 const supabase = require("../config/supabase");
 
-
 async function getRenameFileForm(req, res) {
     try {
         res.render("file-rename-form", {
@@ -38,7 +37,7 @@ async function postRenameFileForm(req, res) {
         console.error(err);
         let errorMsg = "Something went wrong. Please try again."
 
-        res.status(500).render("rename-file-form", {
+        res.status(500).render("file-rename-form", {
             errorList: [{ msg: errorMsg }],
             title: "Rename File"
         })
@@ -89,4 +88,62 @@ async function getFileDetailsHandler(req, res) {
     }
 }
 
-module.exports = { getRenameFileForm, postRenameFileForm, postDeleteFileForm, getFileDetailsHandler };
+async function getMoveFileForm(req, res) {
+    const title = "Move File";
+
+    try {
+        const folders = await db.getFolders(req.user.id);
+        res.render("move-file-form", {
+            title,
+            folders,
+            fileName: req.resource.name,
+            fileId: req.resource.id,
+            currentFolder: req.resource.folderId
+        })
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
+
+}
+
+async function postMoveFileForm(req, res) {
+    const errors = validationResult(req);
+    const title = "Move File";
+    const fileId = req.resource.id;
+    const selectedFolder = req.body.selectedFolder;
+    const folderId = selectedFolder === "" ? null : parseInt(selectedFolder);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).render("move-file-form", {
+            errorList: errors.array(),
+            title,
+            folders,
+            fileName: req.resource.name,
+            fileId: req.resource.id,
+            currentFolder: req.resource.folderId
+        })
+    }
+
+    try {
+        await db.updateFileFolder(folderId, fileId)
+        res.redirect("/")
+    } catch (err) {
+        console.error(err);
+        let errorMsg = "Something went wrong. Please try again."
+
+        res.status(500).render("move-file-form", {
+            errorList: [{ msg: errorMsg }],
+            title,
+            folders,
+            fileName: req.resource.name,
+            fileId: req.resource.id,
+            currentFolder: req.resource.folderId
+        })
+    }
+}
+
+module.exports = {
+    getRenameFileForm, postRenameFileForm, postDeleteFileForm,
+    getFileDetailsHandler, getMoveFileForm, postMoveFileForm
+};

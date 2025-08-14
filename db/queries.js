@@ -49,7 +49,6 @@ async function createFile(id, name, fileType, url, size, folderId, storagePath) 
     })
 }
 
-
 async function getFolders(id) {
     return await db.folder.findMany({
         where: {

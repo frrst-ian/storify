@@ -8,6 +8,7 @@ const editFolderController = require("../controllers/editFolderController");
 const deleteFolderController = require("../controllers/deleteFolderController");
 const fileController = require("../controllers/fileController");
 const fileValidator = require("../validators/fileValidator");
+const moveFileValidator = require("../validators/moveFileValidator");
 const { requireOwnership } = require('../middleware/auth');
 const db = require('../db/queries');
 
@@ -21,5 +22,7 @@ folderRouter.get("/:folderId/file/:fileId", requireOwnership(db.getFileById), fi
 folderRouter.get("/:folderId/file/:fileId/rename", requireOwnership(db.getFileById), fileController.getRenameFileForm);
 folderRouter.post("/:folderId/file/:fileId/rename", fileValidator, requireOwnership(db.getFileById), fileController.postRenameFileForm);
 folderRouter.post("/:folderId/file/:fileId/delete", requireOwnership(db.getFileById), fileController.postDeleteFileForm);
+folderRouter.get("/:folderId/file/:fileId/move", requireOwnership(db.getFileById), fileController.getMoveFileForm);
+folderRouter.post("/:folderId/file/:fileId/move", moveFileValidator, requireOwnership(db.getFileById), fileController.postMoveFileForm);
 
 module.exports = folderRouter;

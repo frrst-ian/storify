@@ -1,0 +1,25 @@
+<%- include("./partials/header") %>
+
+<div class="form-container">
+    <form action="/file/<%=`${fileId}/move`%>" method="POST" > 
+
+        <h1 class="form-heading">Move <%= fileName %> from <%= currentFolder %> to: </h1>
+        <select name="selectedFolder" id="selectedFolder">
+            <option value="">No Folder (Root)</option>
+            <% folders.forEach(f => { %>
+                <option value="<%= f.id %>"><%= f.name %></option>
+                <% }); %>
+        </select>
+
+        <button class="submit-btn" type="submit">Move File</button>
+        <a href="/" class="cancel-btn">Cancel</a>
+        
+        <% if(typeof errorList !== 'undefined' && errorList.length > 0) {%>
+            <ul class="error-msgs">
+                <% errorList.forEach(e => { %>
+                    <li><%=e.msg%></li>
+               <% }) %>
+            </ul>
+            <% } %>
+    </form>
+</div>

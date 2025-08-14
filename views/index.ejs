@@ -15,6 +15,7 @@
                 <p><%= file.name %> </p>
                 <a href="/download/<%=file.id%>">Download</a>
                 <a href="/file/<%= file.id %>/rename">Rename File</a>
+                <a href="/file/<%= file.id %>/move">Move File</a>
                 <a href="/file/<%= file.id %>">View Details</a>
                 <form action="/file/<%=`${file.id}/delete`%>" method="POST">
                        <button class="del-btn" type="submit" onclick="return confirm('Delete this file?')">Delete file</button>
