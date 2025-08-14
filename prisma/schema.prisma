@@ -37,6 +37,7 @@ model File {
   userId    Int
   folder    Folder?   @relation(fields: [folderId], references: [id])
   folderId  Int?
+  storagePath String
 }
 
 model Session {

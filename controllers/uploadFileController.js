@@ -28,7 +28,7 @@ async function postUploadFileForm(req, res, next) {
             })
         }
         const { originalname, size, mimetype } = file;
-        const uploadPath = `${req.user.id}/${originalname}`;
+        const uploadPath = `${req.user.id}/${Date.now()}-${originalname}`;
         const { data, error } = await supabase.storage
             .from('user-files-storify')
             .upload(uploadPath, req.file.buffer);
@@ -47,8 +47,10 @@ async function postUploadFileForm(req, res, next) {
             mimetype,
             supabaseUrl,
             size,
-            folderId
+            folderId,
+            uploadPath
         );
+
         const redirectUrl = folderId ? `/folder/${folderId}` : "/";
         res.redirect(redirectUrl)
 

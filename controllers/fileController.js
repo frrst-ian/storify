@@ -47,12 +47,14 @@ async function postRenameFileForm(req, res) {
 
 async function postDeleteFileForm(req, res) {
     try {
+        // Delete from Supabase
         const { data, error } = await supabase.storage
             .from('user-files-storify')
-            .remove([`${req.user.id}/${req.resource.name}`])
+            .remove([req.resource.storagePath]);
+
         if (error) {
-            console.error('Supabase upload error:', error);
-            return res.status(500).send('Deletion failed');
+            console.error('Supabase deletion error:', error);
+            return res.status(500).send('File deletion failed');
         }
 
         await db.deleteFile(req.resource.id);

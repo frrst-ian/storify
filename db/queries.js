@@ -35,7 +35,7 @@ async function createFolder(id, name) {
     })
 }
 
-async function createFile(id, name, fileType, url, size, folderId) {
+async function createFile(id, name, fileType, url, size, folderId, storagePath) {
     return await db.file.create({
         data: {
             name: name,
@@ -43,8 +43,8 @@ async function createFile(id, name, fileType, url, size, folderId) {
             url: url,
             size: size,
             userId: id,
-            folderId: folderId
-
+            folderId: folderId,
+            storagePath: storagePath
         }
     })
 }
