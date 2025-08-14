@@ -1,4 +1,5 @@
 const db = require("../db/queries");
+const supabase = require("../config/supabase");
 
 async function getUploadFileForm(req, res, next) {
     try {
@@ -27,19 +28,25 @@ async function postUploadFileForm(req, res, next) {
                 folderId
             })
         }
-        const { originalname, size, mimetype, filename } = file;
+        const { originalname, size, mimetype} = file;
+        const { data, error } = await supabase.storage
+            .from('user-files-storify')
+            .upload(originalname, req.file.buffer);
+        if (error) {
+            console.error('Supabase upload error:', error);
+            return res.status(500).send('Upload failed');
+        }
+        const supabaseUrl = `${process.env.SUPABASE_URL}/storage/v1/object/public/user-files-storify/${originalname}`;
 
-        console.log("file ", req.file);
         const userId = req.user.id;
         await db.createFile(
             userId,
             originalname,
             mimetype,
-            `/uploads/${filename}`,
+            supabaseUrl,
             size,
             folderId
         );
-        console.log("Created file with folderId:", folderId);
         const redirectUrl = folderId ? `/folder/${folderId}` : "/";
         res.redirect(redirectUrl)
 
