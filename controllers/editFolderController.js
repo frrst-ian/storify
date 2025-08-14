@@ -2,14 +2,12 @@ const db = require("../db/queries");
 const { validationResult } = require("express-validator");
 
 async function getEditFolderForm(req, res) {
-    const folderId = parseInt(req.params.folderId);
-
+    const folderId = req.resource.id;
 
     try {
-        const folder = await db.getFolderById(folderId);
         res.render("edit-folder-form", {
             title: "Edit Folder",
-            folderName: folder.name,
+            folderName: req.resource.name,
             folderId
         })
     } catch (error) {
@@ -21,7 +19,7 @@ async function getEditFolderForm(req, res) {
 async function postEditFolderForm(req, res) {
     const errors = validationResult(req);
     const folderName = req.body.folderName;
-    const folderId = parseInt(req.params.folderId);
+    const folderId = req.resource.id;
 
     if (!errors.isEmpty()) {
         return res.status(400).render("edit-folder-form", {

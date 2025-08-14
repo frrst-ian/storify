@@ -3,8 +3,7 @@ const supabase = require("../config/supabase");
 
 async function getUploadFileForm(req, res, next) {
     try {
-        const folderId = parseInt(req.params.folderId) || null;
-
+        const folderId = req.resource ? req.resource.id : null;
         res.render("upload-file-form", {
             title: "Upload File",
             folderId
@@ -19,7 +18,7 @@ async function getUploadFileForm(req, res, next) {
 async function postUploadFileForm(req, res, next) {
     try {
         const file = req.file;
-        const folderId = req.params.folderId ? parseInt(req.params.folderId) : null;
+        const folderId = req.resource ? req.resource.id : null;
 
         if (!file) {
             return res.render("upload-file-form", {
@@ -28,15 +27,18 @@ async function postUploadFileForm(req, res, next) {
                 folderId
             })
         }
-        const { originalname, size, mimetype} = file;
+        const { originalname, size, mimetype } = file;
+        const uploadPath = `${req.user.id}/${originalname}`;
         const { data, error } = await supabase.storage
             .from('user-files-storify')
-            .upload(originalname, req.file.buffer);
+            .upload(uploadPath, req.file.buffer);
+
         if (error) {
             console.error('Supabase upload error:', error);
             return res.status(500).send('Upload failed');
         }
-        const supabaseUrl = `${process.env.SUPABASE_URL}/storage/v1/object/public/user-files-storify/${originalname}`;
+
+        const supabaseUrl = `${process.env.SUPABASE_URL}/storage/v1/object/public/user-files-storify/${uploadPath}`;
 
         const userId = req.user.id;
         await db.createFile(

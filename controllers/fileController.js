@@ -1,28 +1,15 @@
 const db = require("../db/queries");
 const { validationResult } = require("express-validator");
+const supabase = require("../config/supabase");
+
 
 async function getRenameFileForm(req, res) {
-    const fileId = parseInt(req.params.fileId);
-    const userId = req.user.id
-
     try {
-        const file = await db.getFileById(fileId);
-
-        if (file === null) {
-            req.flash("error", "Folder doesn't exist");
-            return res.status(404).redirect("/");
-        }
-
-        if (file.userId === userId) {
-            res.render("file-rename-form", {
-                title: "Rename File",
-                fileName: file.name,
-                fileId
-            })
-        } else {
-            req.flash("error", "Permission denied");
-            return res.status(401).redirect("/");
-        }
+        res.render("file-rename-form", {
+            title: "Rename File",
+            fileName: req.resource.name,
+            fileId: req.resource.id
+        })
     } catch (error) {
         console.error(error);
         res.status(500).send(error);
@@ -32,20 +19,20 @@ async function getRenameFileForm(req, res) {
 
 async function postRenameFileForm(req, res) {
     const errors = validationResult(req);
-    const fileName = req.body.fileName;
-    const fileId = parseInt(req.params.fileId);
 
     if (!errors.isEmpty()) {
         return res.status(400).render("file-rename-form", {
             errorList: errors.array(),
             title: "Rename File",
-            fileName,
-            fileId
+            fileName: req.resource.name,
+            fileId: req.resource.id
         })
     }
 
     try {
-        await db.updateFileName(fileName, fileId);
+        const fileName = req.body.fileName;
+
+        await db.updateFileName(fileName, req.resource.id);
         res.redirect("/")
     } catch (err) {
         console.error(err);
@@ -59,24 +46,18 @@ async function postRenameFileForm(req, res) {
 }
 
 async function postDeleteFileForm(req, res) {
-    const fileId = parseInt(req.params.fileId);
-    const userId = req.user.id;
-
     try {
-        const file = await db.getFileById(fileId);
-        if (file === null) {
-            req.flash("error", "File doesn't exist");
-            return res.status(404).redirect("/")
+        const { data, error } = await supabase.storage
+            .from('user-files-storify')
+            .remove([`${req.user.id}/${req.resource.name}`])
+        if (error) {
+            console.error('Supabase upload error:', error);
+            return res.status(500).send('Deletion failed');
         }
 
-        if (file.userId === userId) {
-            await db.deleteFile(fileId);
-            req.flash("success", "File deleted");
-            res.redirect("/");
-        } else {
-            req.flash("error", "Permission denied");
-            return res.status(401).redirect("/");
-        }
+        await db.deleteFile(req.resource.id);
+        req.flash("success", "File deleted");
+        res.redirect("/");
     } catch (err) {
         console.error(err);
         res.status(500).send(err);
@@ -84,33 +65,22 @@ async function postDeleteFileForm(req, res) {
 }
 
 async function getFileDetailsHandler(req, res) {
-    const fileId = parseInt(req.params.fileId);
-    const userId = req.user.id
     const title = "File Details";
     try {
-        const file = await db.getFileById(fileId);
-        if (file === null) {
-            req.flash("error", "File doesn't exist");
-            return res.status(404).redirect("/");
-        }
+        const file = req.resource;
 
-        const formatFileSize =( Number(file.size) / 1048576).toFixed(2);
+        const formatFileSize = (Number(file.size) / 1048576).toFixed(2);
         const date = file.createdAt;
         const formatDate = date.toDateString();
-        if (file.userId === userId) {
-            res.render("file-details", {
-                title: title,
-                fileName: file.name,
-                fileSize: formatFileSize,
-                fileUploadDate: formatDate,
-                fileType: file.fileType,
-                user: req.user,
-                file: file
-            })
-        } else {
-            req.flash("error", "Permission denied");
-            return res.status(401).redirect("/");
-        }
+        res.render("file-details", {
+            title: title,
+            fileName: file.name,
+            fileSize: formatFileSize,
+            fileUploadDate: formatDate,
+            fileType: file.fileType,
+            user: req.user,
+            file: file
+        })
     } catch (error) {
         console.error(error);
         res.status(500).send(error);

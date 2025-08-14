@@ -17,6 +17,11 @@
             <% filesInFolder.forEach(f => { %> 
                 <p><%= f.name %> </p>
                 <a href="/download/<%= f.id %>">Download</a>
+                <a href="/folder/<%= folder.id %>/file/<%= f.id %>">View Details</a>
+                <a href="/folder/<%= folder.id %>/file/<%= f.id %>/rename">Rename</a>
+                <form action="/folder/<%=folder.id%>/file/<%=f.id%>/delete" method="POST">
+                       <button class="del-btn" type="submit" onclick="return confirm('Delete this file?')">Delete file</button>
+                </form>
              <%}); %>
         </div>
         <% } %>

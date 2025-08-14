@@ -2,24 +2,10 @@ const db = require("../db/queries");
 const { pipeline } = require('stream/promises');
 
 async function downloadFile(req, res, next) {
-    const fileId = parseInt(req.params.fileId);
-    const userId = req.user.id;
     try {
-        const file = await db.getFileById(fileId);
-        if (file == null) {
-            req.flash('error', "File not found");
-            return res.status(404).redirect("/");
-        }
+        const response = await fetch(req.resource.url);
 
-        if (file.userId !== userId) {
-
-            req.flash('error', "Permission denied");
-            return res.status(401).redirect("/");
-        }
-
-        const response = await fetch(file.url);
-
-        res.setHeader('Content-Disposition', `attachment; filename="${file.name}"`);
+        res.setHeader('Content-Disposition', `attachment; filename="${req.resource.name}"`);
         res.setHeader('Content-Type', 'application/octet-stream');
 
         // Stream file to user
