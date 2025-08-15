@@ -1,35 +1,39 @@
 <%- include("./partials/header") %>
 
-<div class="form-container">
-    <form action="/sign-up" method="POST">
+<main class="auth-page">
+    <div class="auth-form-wrapper">
+        <form class="auth-form" action="/sign-up" method="POST">
+    
+            <h1 class="form-heading">Create your account</h1>
+           
+            <div class="input-group">
+                <label for="fullName"></label>
+                <input name="fullName" id="fullName" type="text"  placeholder="Full Name" value="<% typeof fullName  !== "undefined" ? fullName : '' %>">
+            </div>
 
-        <h1 class="form-heading">Sign Up</h1>
-        <div class="input-group">
-            <label for="email" value="<% typeof email  !== "undefined" ? email : '' %>">Email</label>
-            <input name="email" id="email" type="email"  placeholder="condoriano@onepiece.me">
-        </div>
-
-        <div class="input-group">
-            <label for="fullName">Full Name</label>
-            <input name="fullName" id="fullName" type="text"  placeholder="Con D. Oriano" value="<% typeof fullName  !== "undefined" ? fullName : '' %>">
-        </div>
-
-        <div class="input-group">
-            <label for="password">Password</label>
-            <input name="password" id="password" type="password">
-        </div>
-
-        <div class="input-group"><label for="confirmPassword">Confirm Password</label>
-            <input type="password" name="confirmPassword" id="confirmPassword"></div>
-
-        <button class="submit-btn" type="submit">Sign Up</button>
-
-        <% if(typeof errorList !== 'undefined' && errorList.length > 0) {%>
-            <ul class="error-msgs">
-                <% errorList.forEach(e => { %>
-                    <li><%=e.msg%></li>
-               <% }) %>
-            </ul>
-            <% } %>
-    </form>
-</div>
+             <div class="input-group">
+                <label for="email" value="<% typeof email  !== "undefined" ? email : '' %>"></label>
+                <input name="email" id="email" type="email"  placeholder="Email">
+            </div>
+    
+            <div class="input-group">
+                <label for="password"></label>
+                <input name="password" id="password" type="password" placeholder="Password">
+            </div>
+    
+            <div class="input-group"><label for="confirmPassword"></label>
+                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password"></div>
+    
+            <button class="auth-btn" type="submit">Create account</button>
+            <a class="auth-btn" href="/">I already have an account <svg xmlns="http://www.w3.org/2000/svg" width="14px" fill="none" viewBox="0 0 16 16" class="icon page_arrowRight__4KrB_"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 4.75 13.25 8m0 0-3.5 3.25M13.25 8H2.75"></path></svg></a>
+    
+            <% if(typeof errorList !== 'undefined' && errorList.length > 0) {%>
+                <ul class="error-msgs">
+                    <% errorList.forEach(e => { %>
+                        <li><%=e.msg%></li>
+                   <% }) %>
+                </ul>
+                <% } %>
+        </form>
+    </div>
+</main>

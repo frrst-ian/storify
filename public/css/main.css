@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Space%20Grotesk:700|Inter:400");
+@import url("./components.css");
+@import url("./utilities.css");
+
 /* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,
@@ -79,6 +83,19 @@ a {
   isolation: isolate;
 }
 
+:root {
+  --text: #fcfcfc;
+  --text-2: #0b0b0b;
+  --background: #030303;
+  --primary: #e6e6e6;
+  --secondary: #248eff;
+  --accent: #00ffcc;
+
+  --rounding-normal: 7px;
+  --spacing-1: 8px;
+  --spacing-2: 14px;
+}
+
 /* For putting the footer at the bottom */
 html,
 body {
@@ -105,8 +122,33 @@ footer {
 }
 
 /* Main styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+body {
+  font-family: "Inter";
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 700;
+}
 
 header > .container {
-  background: #4c4c4c;
-  color: white;
+  background: var(--background);
+}
+
+.logo-text > a {
+  color: var(--text);
+}
+
+.logo-text {
+  padding: 12px 28px;
+  cursor: pointer;
 }

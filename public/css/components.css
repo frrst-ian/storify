@@ -1,0 +1,77 @@
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--background);
+  color: var(--text);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.form-heading {
+  font-size: 1.7em;
+}
+
+.input-group > label + input {
+  width: 100%;
+  height: 42px;
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.2px;
+  background: hsla(0, 0%, 100%, 0.05);
+  border: 1px solid hsla(0, 0%, 100%, 0.05);
+  border-radius: var(--rounding-normal);
+  outline: none;
+  transition: color 0.3s ease, border 0.3s ease;
+}
+
+.input-group > label + input:hover {
+  border-color: hsla(0, 0%, 100%, 0.25);
+}
+
+.auth-btn {
+  background-color: #e1e1e1;
+  color: var(--text-2);
+  height: 42px;
+  border: 1px solid hsla(0, 0%, 100%, 0.05);
+  border-radius: var(--rounding-normal);
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: 0.3s ease-in-out;
+}
+
+button.auth-btn:hover {
+  box-shadow: rgb(32 120 183 / 60%) 0px 4px 16px,
+    rgb(124 57 179 / 50%) 0px 8px 24px, rgb(235 50 50 / 23%) 0px 16px 56px;
+}
+
+a.auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 16px;
+  width: 100%;
+  letter-spacing: 0.2px;
+
+  color: #cdcdcd;
+  background-color: var(--background);
+  border: 1px solid hsla(0, 0%, 100%, 0.152);
+  border-radius: var(--rounding-normal);
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  transition: color 0.3s ease-in-out, transform 0.1s ease-in-out;
+}
+
+a.auth-btn:hover {
+  color: var(--text);
+}
