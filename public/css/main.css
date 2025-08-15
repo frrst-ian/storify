@@ -123,7 +123,7 @@ main {
 
 footer {
   padding: 1rem;
-  background-color:#18171a;
+  background-color:#0c0b0c;
   color: #eee;
   text-align: center;
 }
@@ -152,10 +152,11 @@ header > .container {
 
 .logo-text > a {
   color: var(--text);
+  font-size: 0.9em;
 }
 
 .logo-text {
-  padding: 12px 28px;
+  padding: 18px 34px;
   cursor: pointer;
 }
 

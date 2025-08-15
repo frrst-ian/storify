@@ -1,6 +1,13 @@
 const { body } = require("express-validator");
 
 const signUpValidator = [
+    body("fullName")
+        .trim()
+        .notEmpty()
+        .withMessage("Full name is required")
+        .isLength({ max: 50 })
+        .withMessage("Full name must be under 50 characters"),
+
     body("email")
         .trim()
         .notEmpty()
@@ -10,13 +17,6 @@ const signUpValidator = [
         .withMessage("Must be a valid email")
         .isLength({ max: 50 })
         .withMessage("Email must be under 50 characters"),
-
-    body("fullName")
-        .trim()
-        .notEmpty()
-        .withMessage("Full name is required")
-        .isLength({ max: 50 })
-        .withMessage("Full name must be under 50 characters"),
 
     body("password")
         .notEmpty()

@@ -76,3 +76,25 @@ a.auth-btn {
 a.auth-btn:hover {
   color: var(--text);
 }
+
+ul.error-msgs {
+    list-style: none;
+    font-size: 0.95em;
+}
+
+.error-wrapper{
+  display: flex;
+  gap: 6px;
+}
+
+.error-wrapper {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 3px;
+    color: indianred;
+}
+
+.error-icon{
+  margin-bottom: 2px;
+}

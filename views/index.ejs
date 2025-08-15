@@ -47,13 +47,16 @@
                 <button class="auth-btn" type="submit">Log In</button>
                     <a class="auth-btn" rel="noopener noreferrer" href="/sign-up">Don't have an account? Sign up<svg xmlns="http://www.w3.org/2000/svg" width="14" fill="none" viewBox="0 0 16 16" class="icon page_arrowRight__4KrB_"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 4.75 13.25 8m0 0-3.5 3.25M13.25 8H2.75"></path></svg></a>
                 <% if (errorList.error && errorList.error.length > 0) { %>
-                        <ul class="errors">
+                        <ul class="error-msgs">
                           <% errorList.error.forEach(function(message) { %>
-                          <li class="error"><%= message %></li>
+                          <div class="error-wrapper">
+                              <img class="error-icon" src="../icons/error.svg" width="20" alt="Error icon">
+                              <li class="error"><%= message %></li>
+                          </div>
                           <% }); %>
                           </ul>
-                    <% } %>
-                    </form>
+                <% } %>
+                </form>
             </div>
         <% } %>
         

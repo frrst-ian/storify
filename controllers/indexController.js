@@ -6,11 +6,11 @@ async function getIndex(req, res) {
         return res.render("index", {
             user: req.user,
             errorList: req.flash(),
-            title:"Home | Storify"
+            title: "Home | Storify"
         });
 
     }
-    
+
     try {
         const userId = req.user.id;
         const files = await db.getFiles(userId);
@@ -28,7 +28,14 @@ async function getIndex(req, res) {
 
     } catch (error) {
         console.error("Index page error:", error);
-        res.status(500).render("error", { message: "Server Error" });
+        let errorMsg = "Something went wrong. Please try again.";
+
+        res.status(500).render("index", {
+            errorList: [{ errorMsg }]
+        });
+        // Not implemented
+        // res.status(500).render("error", { message: "Server Error" });
+
     }
 }
 
