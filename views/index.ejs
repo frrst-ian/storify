@@ -1,7 +1,6 @@
 <%- include('partials/header') %>
 
-<main>
-    <div class="container">
+<main class="auth-page">
         <% if(locals.user) { %> 
         <h1>Welcome to Storify <%= locals.user.fullName %> </h1>
             <% if(folders.length === 0 && filesWithoutFolder.length === 0) {%>
@@ -33,35 +32,31 @@
         <!-- Login Form -->
         <% } else { %>
         
-        <form action="/log-in" method="POST">
-        <h1 class="form-heading">Log In</h1>
-
-        <div class="input-group">
-            <label for="email" value="<% typeof email  !== "undefined" ? email : '' %>">Email</label>
-            <input name="email" id="email" type="email"  placeholder="condoriano@onepiece.me">
-        </div>
-    
-        <div class="input-group">
-            <label for="password">Password</label>
-            <input name="password" id="password" type="password">
-        </div>
-        
-        <button class="submit-btn" type="submit">Log In</button>
-        <p class="signup">Don't have an account?
-            <a rel="noopener noreferrer" href="/sign-up">Sign up</a>
-         </p>
-
-        <% if (errorList.error && errorList.error.length > 0) { %>
-                <ul class="errors">
-                  <% errorList.error.forEach(function(message) { %>
-                  <li class="error"><%= message %></li>
-                  <% }); %>
-                  </ul>
-            <% } %>
-    </form>
+            <div class="auth-form-wrapper">
+                <form class="auth-form" action="/log-in" method="POST">
+                <h1 class="form-heading">Log In</h1>
+                <div class="input-group">
+                    <label for="email" value="<% typeof email  !== "undefined" ? email : '' %>"></label>
+                    <input name="email" id="email" type="email"  placeholder="Email">
+                </div>
+                <div class="input-group">
+                    <label for="password"></label>
+                    <input name="password" id="password" type="password" placeholder="Password">
+                </div>
+            
+                <button class="auth-btn" type="submit">Log In</button>
+                    <a class="auth-btn" rel="noopener noreferrer" href="/sign-up">Don't have an account? Sign up<svg xmlns="http://www.w3.org/2000/svg" width="14px" fill="none" viewBox="0 0 16 16" class="icon page_arrowRight__4KrB_"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 4.75 13.25 8m0 0-3.5 3.25M13.25 8H2.75"></path></svg></a>
+                <% if (errorList.error && errorList.error.length > 0) { %>
+                        <ul class="errors">
+                          <% errorList.error.forEach(function(message) { %>
+                          <li class="error"><%= message %></li>
+                          <% }); %>
+                          </ul>
+                    <% } %>
+                    </form>
+            </div>
         <% } %>
         
-    </div>
 </main>
 
 <%- include('partials/footer') %>

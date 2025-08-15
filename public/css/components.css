@@ -15,6 +15,7 @@
 
 .form-heading {
   font-size: 1.7em;
+  text-align: center;
 }
 
 .input-group > label + input {
