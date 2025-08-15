@@ -105,7 +105,6 @@ app.get("/log-out", (req, res, next) => {
   });
 });
 
-// Start server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`App running on port ${PORT}`);
 });
