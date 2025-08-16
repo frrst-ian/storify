@@ -1,67 +1,75 @@
 <%- include('partials/header') %>
 
-<main class="auth-page">
-        <% if(locals.user) { %> 
-        <h1>Welcome to Storify <%= locals.user.fullName %> </h1>
+<% if(locals.user) { %>
+    <%- include('partials/nav-bar') %>
+        <main class="main-wrapper">
+            <div class="main-wrapper">
+            <h1>Welcome to Storify <%= locals.user.fullName %> </h1>
             <% if(folders.length === 0 && filesWithoutFolder.length === 0) {%>
                 <p>No files or Folders Exist</p>
+            <% } %>
+            <div class="files-container">
+                <% folders.forEach(folder => {%>
+                    <a href="/folder/<%= folder.id %>"><%= folder.name %> </a>
+                <%  }); %>
+                <% filesWithoutFolder.forEach(file => {%>
+                    <p><%= file.name %> </p>
+                    <a href="/download/<%=file.id%>">Download</a>
+                    <a href="/file/<%= file.id %>/rename">Rename File</a>
+                    <a href="/file/<%= file.id %>/move">Move File</a>
+                    <a href="/file/<%= file.id %>">View Details</a>
+                    <form action="/file/<%=`${file.id}/delete`%>" method="POST">
+                        <button class="del-btn" type="submit" onclick="return confirm('Delete this file?')">Delete file</button>
+                    </form>
+                <%  }); %>
+                <% if (errorList.success && errorList.success.length > 0) { %>
+                    <ul class="success-msgs">
+                        <% errorList.success.forEach(function(message) { %>
+                            <li class="success"><%= message %></li>
+                        <% }); %>
+                    </ul>
                 <% } %>
-        <div class="files-containers">
-            <% folders.forEach(folder => {%>
-                <a href="/folder/<%= folder.id %>"><%= folder.name %> </a>
-           <%  }); %>
-            <% filesWithoutFolder.forEach(file => {%>
-                <p><%= file.name %> </p>
-                <a href="/download/<%=file.id%>">Download</a>
-                <a href="/file/<%= file.id %>/rename">Rename File</a>
-                <a href="/file/<%= file.id %>/move">Move File</a>
-                <a href="/file/<%= file.id %>">View Details</a>
-                <form action="/file/<%=`${file.id}/delete`%>" method="POST">
-                       <button class="del-btn" type="submit" onclick="return confirm('Delete this file?')">Delete file</button>
-                </form>
-            <%  }); %>
-             <% if (errorList.success && errorList.success.length > 0) { %>
-                <ul class="success-msgs">
-                  <% errorList.success.forEach(function(message) { %>
-                    <li class="success"><%= message %></li>
-                    <% }); %>
-                </ul>
-        <% } %>
-        </div>
+            </div>
+        </main>
+    </section>
 
-        <!-- Login Form -->
-        <% } else { %>
-        
-            <div class="auth-form-wrapper">
-                <form class="auth-form" action="/log-in" method="POST">
+<% } else { %>
+    <main class="auth-page">
+        <div class="auth-form-wrapper">
+            <form class="auth-form" action="/log-in" method="POST">
                 <h1 class="form-heading">Log in to Storify</h1>
+                
                 <div class="input-group">
-                    <label for="email" value="<% typeof email  !== "undefined" ? email : '' %>"></label>
-                    <input name="email" id="email" type="email"  placeholder="Email">
+                    <label for="email"></label>
+                    <input name="email" id="email" type="email" placeholder="Email" autocomplete="email" value="<%= typeof email !== 'undefined' ? email : '' %>">
                 </div>
+                
                 <div class="input-group">
                     <label for="password"></label>
-                    <input name="password" id="password" type="password" placeholder="Password">
+                    <input name="password" id="password" type="password" placeholder="Password" autocomplete="current-password">
                 </div>
             
                 <button class="auth-btn" type="submit">Log In</button>
-                    <a class="auth-btn" rel="noopener noreferrer" href="/sign-up">Don't have an account? Sign up<svg xmlns="http://www.w3.org/2000/svg" width="14" fill="none" viewBox="0 0 16 16" class="icon page_arrowRight__4KrB_"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 4.75 13.25 8m0 0-3.5 3.25M13.25 8H2.75"></path></svg></a>
+                <a class="auth-btn" rel="noopener noreferrer" href="/sign-up">
+                    Don't have an account? Sign up
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" fill="none" viewBox="0 0 16 16" class="icon page_arrowRight__4KrB_">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 4.75 13.25 8m0 0-3.5 3.25M13.25 8H2.75"></path>
+                    </svg>
+                </a>
+                
                 <% if (errorList.error && errorList.error.length > 0) { %>
-                        <ul class="error-msgs">
-                          <% errorList.error.forEach(function(message) { %>
-                          <div class="error-wrapper">
-                              <img class="error-icon" src="../icons/error.svg" width="20" alt="Error icon">
-                              <li class="error"><%= message %></li>
-                          </div>
-                          <% }); %>
-                          </ul>
+                    <ul class="error-msgs">
+                        <% errorList.error.forEach(function(message) { %>
+                            <div class="error-wrapper">
+                                <img class="error-icon" src="../icons/error.svg" width="20" alt="Error icon">
+                                <li class="error"><%= message %></li>
+                            </div>
+                        <% }); %>
+                    </ul>
                 <% } %>
-                </form>
-            </div>
-        <% } %>
-        
-</main>
+            </form>
+        </div>
+    </main>
+<% } %>
 
 <%- include('partials/footer') %>
-</body>
-</html>

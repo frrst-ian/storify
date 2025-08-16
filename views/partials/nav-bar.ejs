@@ -1,12 +1,45 @@
-<nav>
-    <div class="container">
-        <ul>
-            <% if(locals.user && !locals.inFolder){ %>
-                <li><a href="/">Home</a></li>
-                <li><a href="/log-out">Logout</a></li>
-                <li><a href="/upload">Upload</a></li>
-                <li><a href="/create-folder">Create Folder</a></li>
-           <% } %>
-        </ul>
-    </div>
-</nav>
+<section>
+  <nav>
+    <ul>
+      <% if(locals.user && !locals.inFolder){ %>
+      <div class="nav-items">
+        <li>
+          <a href="/">
+            <div class="nav-item">
+              <img src="../../icons/house.svg" width="22" alt="Home icon" />
+              <p>Home</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="/upload">
+            <div class="nav-item">
+              <img src="../../icons/file-up.svg" width="22" alt="Home icon" />
+              <p>Upload File</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="/create-folder">
+            <div class="nav-item">
+              <img
+                src="../../icons/folder-plus.svg"
+                width="22"
+                alt="Home icon"
+              />
+              <p>Create Folder</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="/log-out">
+            <div class="nav-item">
+              <img src="../../icons/log-out.svg" width="22" alt="Home icon" />
+              <p>Logout</p>
+            </div>
+          </a>
+        </li>
+      </div>
+      <% } %>
+    </ul>
+  </nav>

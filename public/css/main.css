@@ -80,6 +80,7 @@ h6 {
 /* Remove text decoration */
 a {
   text-decoration: none;
+  color: var(--text);
 }
 
 /*
@@ -117,13 +118,9 @@ body {
   min-height: 100vh;
 }
 
-main {
-  flex: 1; /* This makes main grow to fill space */
-}
-
 footer {
   padding: 1rem;
-  background-color:#0c0b0c;
+  background-color: #0c0b0c;
   color: #eee;
   text-align: center;
 }
@@ -146,18 +143,69 @@ h5 {
   font-weight: 700;
 }
 
-header > .container {
+.header-wrapper,
+nav {
   background: var(--background);
+}
+
+.header-wrapper {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.122);
 }
 
 .logo-text > a {
   color: var(--text);
-  font-size: 0.9em;
+  font-size: 0.85em;
 }
 
 .logo-text {
   padding: 18px 34px;
   cursor: pointer;
+}
+
+section {
+  display: flex;
+  height: 100vh;
+}
+
+nav {
+  flex: 0.6;
+  border-right: 1px solid rgba(255, 255, 255, 0.122);
+}
+
+nav > ul {
+  list-style-type: none;
+  height: 100%;
+  padding: 0;
+}
+
+.nav-items,
+.nav-item {
+  display: flex;
+}
+
+.nav-items {
+  height: 100%;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 20px;
+  padding-left: 42px;
+}
+
+.nav-items > :last-child {
+  margin-top: 425px;
+}
+
+.nav-item {
+  gap: 16px;
+  align-items: center;
+}
+
+.nav-item > img {
+  cursor: pointer;
+}
+
+main.main-wrapper {
+  flex: 3;
 }
 
 /* Footer Styles */
