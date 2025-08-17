@@ -5,5 +5,40 @@
         </a>
     </div>
 </footer>
+<script>
+function toggleDropdown(button) {
+    const dropdown = button.closest('.dropdown');
+    const allDropdowns = document.querySelectorAll('.dropdown');
+    
+    allDropdowns.forEach(d => {
+        if (d !== dropdown) {
+            d.classList.remove('active');
+        }
+    });
+    
+    dropdown.classList.toggle('active');
+}
+
+function deleteFile(fileId) {
+    if (confirm('Delete this file?')) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = `/file/${fileId}/delete`;
+        document.body.appendChild(form);
+        form.submit();
+    }
+    document.querySelectorAll('.dropdown').forEach(d => {
+        d.classList.remove('active');
+    });
+}
+
+document.addEventListener('click', function(event) {
+    if (!event.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(d => {
+            d.classList.remove('active');
+        });
+    }
+});
+</script>
 </body>
 </html>
