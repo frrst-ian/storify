@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  height: 100vh;
   background-color: var(--background);
   color: var(--text);
 }
@@ -78,23 +78,23 @@ a.auth-btn:hover {
 }
 
 ul.error-msgs {
-    list-style: none;
-    font-size: 0.95em;
+  list-style: none;
+  font-size: 0.95em;
 }
 
-.error-wrapper{
+.error-wrapper {
   display: flex;
   gap: 6px;
 }
 
 .error-wrapper {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    margin-bottom: 3px;
-    color: indianred;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 3px;
+  color: indianred;
 }
 
-.error-icon{
+.error-icon {
   margin-bottom: 2px;
 }

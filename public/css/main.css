@@ -148,8 +148,8 @@ nav {
   background: var(--background);
 }
 
-.header-wrapper {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.122);
+hr {
+  border: 1px solid #000000db;
 }
 
 .logo-text > a {
@@ -186,26 +186,44 @@ nav > ul {
 .nav-items {
   height: 100%;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   margin-top: 20px;
-  padding-left: 42px;
+  padding-left: 0;
 }
 
 .nav-items > :last-child {
-  margin-top: 425px;
+  margin-top: 380px;
 }
 
 .nav-item {
   gap: 16px;
   align-items: center;
+  padding: 8px;
+  transition: 0.3s ease-in-out;
+}
+
+.nav-item:hover {
+  background-color: #171717;
+  transition: 0.3s ease-in-out;
 }
 
 .nav-item > img {
   cursor: pointer;
+  margin-left: 32px;
 }
 
 main.main-wrapper {
   flex: 3;
+  color: var(--text);
+  background-color: var(--background);
+}
+
+div.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  padding: 40px 0px 0px 60px;
 }
 
 /* Footer Styles */
