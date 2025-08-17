@@ -1,34 +1,69 @@
 <%- include('partials/header') %>
 
-<main>
-    <div class="container">
-        <% if(locals.user) { %> 
-            <% if( filesInFolder.length === 0) {%>
-                <p>No Files Exist</p>
-                <% } %>
-                <a href="/folder/<%= folder.id %>/upload">Upload to Folder</a>
-                <a href="/folder/<%= folder.id %>/edit">Edit Folder</a>
-                <form action="/folder/<%=`${folder.id}/delete`%>" method="POST">
-                       <button class="del-btn" type="submit" onclick="return confirm('Delete this folder?')">Delete Folder</button>
-                </form>
-        <h2><%= folder.name %></h2> 
-        <a href="/" class="back-btn">Back</a>
-        <div class="files-containers">
-            <% filesInFolder.forEach(f => { %> 
-                <p><%= f.name %> </p>
-                <a href="/download/<%= f.id %>">Download</a>
-                <a href="/folder/<%= folder.id %>/file/<%= f.id %>">View Details</a>
-                <a href="/folder/<%= folder.id %>/file/<%= f.id %>/rename">Rename</a>
-                <a href="/folder/<%= folder.id %>/file/<%= f.id %>/move">Move File</a>
-                <form action="/folder/<%=folder.id%>/file/<%=f.id%>/delete" method="POST">
-                       <button class="del-btn" type="submit" onclick="return confirm('Delete this file?')">Delete file</button>
-                </form>
-             <%}); %>
+<% if(locals.user) { %>
+<hr>
+<%- include('partials/infolder-nav') %>
+
+<main class="main-wrapper">
+  <div class="main-wrapper">
+      <div class="folder-header">
+          <img width="30" height="32" src="../icons/folder.svg" alt="folder-icon">
+          <h2><%= folder.name %></h2>
+      </div>
+          <hr class="content-line">
+
+    <% if( filesInFolder.length === 0) {%>
+    <p class="p2">No Files Exist.</p>
+    <% } %>
+    <div class="files-container">
+      <% filesInFolder.forEach(f => { %>
+      <div class="file-item">
+        <div class="file-info">
+          <div class="file-icon">
+            <img src="../icons/file.svg" alt="file icon">
+          </div>
+          <div class="file-name"><%= f.name %> </div>
         </div>
-        <% } %>
+         <div class="dropdown">
+          <button class="three-dot-btn" onclick="toggleDropdown(this)">
+            <div class="three-dots">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item"  href="/download/<%= f.id %>">
+              <img src="../icons/download.svg" alt="download icon">
+              Download
+            </a>
+            <a class="dropdown-item" href="/folder/<%= folder.id %>/file/<%= f.id %>/rename">
+              <img src="../icons/folder-pen.svg" alt="rename icon">
+              Rename
+            </a>
+            <a class="dropdown-item" href="/folder/<%= folder.id %>/file/<%= f.id %>/move">
+              <img src="../icons/file-input.svg" alt="move icon">
+              Move
+            </a>
+            <a class="dropdown-item" href="/folder/<%= folder.id %>/file/<%= f.id %>">
+              <img src="../icons/info.svg" alt="info icon">
+              View Details
+            </a>
+         <div class="dropdown-item danger" onclick="deleteFileOnFolder('<%= folder.id %>', '<%= f.id %>')">
+              <img src="../icons/trash.svg" alt="delete icon">
+
+              Delete
+            </div>
+          </div>
+        </div>
+      </div>
+      <%}); %>
+      <% } %>
     </div>
 </main>
+</section>
 
-<%- include('partials/footer') %>
+<%- include('partials/footer', {folderId: folder.id} ) %>
 </body>
+
 </html>

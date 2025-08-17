@@ -1,0 +1,60 @@
+<section>
+  <nav>
+    <ul>
+      <% if(locals.user){ %>
+      <div class="nav-items">
+        <li>
+          <a href="/">
+            <div class="nav-item">
+              <img src="../../icons/house.svg" width="23" height="23" alt="Home icon" />
+              <p>Home</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="/folder/<%= folder.id %>/upload">
+            <div class="nav-item">
+              <img src="../../icons/file-up.svg" width="23" height="23" alt="Home icon" />
+              <p>Upload File</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="/folder/<%= folder.id %>/edit">
+            <div class="nav-item">
+              <img
+                src="../../icons/folder-pen.svg"
+                width="23"
+                height="23"
+                alt="Home icon"
+              />
+              <p>Rename Folder</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <form action="/folder/<%=`${folder.id}/delete`%>" method="POST">
+            <div class="nav-item">
+                <img src="../../icons/trash.svg" width="23" height="23" alt="Home icon" />
+                <button
+                  class="del-btn"
+                  type="submit"
+                  onclick="return confirm('Delete this folder?')"
+                >
+                  Delete Folder
+                </button>
+            </div>
+          </form>
+        </li>
+        <li>
+          <a href="/log-out">
+            <div class="nav-item">
+              <img src="../../icons/log-out.svg" width="23" height="23" alt="Home icon" />
+              <p>Logout</p>
+            </div>
+          </a>
+        </li>
+      </div>
+      <% } %>
+    </ul>
+  </nav>

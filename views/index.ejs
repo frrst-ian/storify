@@ -9,13 +9,13 @@
     <p class="p1">Name</p>
     <hr class="content-line">
     <% if(folders.length === 0 && filesWithoutFolder.length === 0) {%>
-    <p>No files or Folders Exist</p>
+    <p class="p2">No files or Folders Exist.</p>
     <% } %>
     <div class="files-container">
       <% folders.forEach(folder => {%>
       <div class="folder-item">
-          <img src="../icons/folder.svg" alt="folder icon">
-          <a href="/folder/<%= folder.id %>"><%= folder.name %> </a>
+        <img src="../icons/folder.svg" alt="folder icon">
+        <a href="/folder/<%= folder.id %>"><%= folder.name %> </a>
       </div>
       <%  }); %>
       <% filesWithoutFolder.forEach(file => {%>
@@ -41,19 +41,19 @@
               Download
             </a>
             <a class="dropdown-item" href="/file/<%= file.id %>/rename">
-            <img src="../icons/folder-pen.svg" alt="rename icon">
+              <img src="../icons/folder-pen.svg" alt="rename icon">
               Rename
             </a>
             <a class="dropdown-item" href="/file/<%= file.id %>/move">
-                <img src="../icons/file-input.svg" alt="move icon">
+              <img src="../icons/file-input.svg" alt="move icon">
               Move
             </a>
             <a class="dropdown-item" href="/file/<%= file.id %>">
-            <img src="../icons/info.svg" alt="info icon">
+              <img src="../icons/info.svg" alt="info icon">
               View Details
             </a>
             <div class="dropdown-item danger" onclick="deleteFile('<%= file.id %>')">
-            <img src="../icons/trash.svg" alt="delete icon">
+              <img src="../icons/trash.svg" alt="delete icon">
 
               Delete
             </div>

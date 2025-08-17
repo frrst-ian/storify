@@ -95,6 +95,7 @@ a {
   --text: #fcfcfc;
   --text-2: #0b0b0b;
   --background: #030303;
+  --background-2:	#151516;
   --primary: #e6e6e6;
   --secondary: #248eff;
   --accent: #00ffcc;
@@ -191,6 +192,7 @@ div.main-wrapper,
   gap: 16px;
   margin-top: 20px;
   padding-left: 0;
+  color: #E5E9EB;
 }
 
 .nav-items > :last-child {
@@ -212,12 +214,13 @@ div.main-wrapper,
 .nav-item > img {
   cursor: pointer;
   margin-left: 32px;
+  margin-bottom: 4px;
 }
 
 main.main-wrapper {
   flex: 3;
   color: var(--text);
-  background-color: var(--background);
+  background-color: var(--background-2);
 }
 
 div.main-wrapper {
@@ -225,6 +228,11 @@ div.main-wrapper {
   justify-content: start;
   align-items: start;
   padding: 40px 0px 0px 60px;
+}
+
+.folder-item a,.files-container  {
+
+  color: #CAD3D7;
 }
 
 .files-container {
@@ -379,6 +387,32 @@ hr.content-line {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+button.del-btn {
+    color: #d93025;
+    background-color: var(--background);
+    border: none;
+    padding: none;
+}
+
+.folder-header {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.folder-header h2 {
+  text-align: center;
+  font-size: 1.4em;
+}
+
+p.p2 {
+  margin: 20px 0px 0px 20px;
+  font-style: italic;
+  color: #dfdfdf;
 }
 
 /* Footer Styles */

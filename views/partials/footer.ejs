@@ -32,6 +32,19 @@ function deleteFile(fileId) {
     });
 }
 
+function deleteFileOnFolder(folderId,fileId) {
+    if (confirm('Delete this file?')) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = `/folder/${folderId}/file/${fileId}/delete`;
+        document.body.appendChild(form);
+        form.submit();
+    }
+    document.querySelectorAll('.dropdown').forEach(d => {
+        d.classList.remove('active');
+    });
+}
+
 document.addEventListener('click', function(event) {
     if (!event.target.closest('.dropdown')) {
         document.querySelectorAll('.dropdown').forEach(d => {
