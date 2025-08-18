@@ -1,16 +1,18 @@
 <%- include("./partials/header") %>
 
 <div class="form-container">
-    <form action="<%= folderId ? `/folder/${folderId}/upload` : '/upload' %>" method="POST" enctype="multipart/form-data"> 
+    <form class="form-contents" action="<%= folderId ? `/folder/${folderId}/upload` : '/upload' %>" method="POST" enctype="multipart/form-data"> 
 
-        <h1 class="form-heading">Upload File</h1>
+        <h1 class="form-heading">File upload</h1>
         <div class="input-group">
-            <label for="file" value="<% typeof file  !== "undefined" ? file : '' %>">File</label>
-            <input name="file" id="file" type="file"  >
+            <label for="file" value="<% typeof file  !== "undefined" ? file : '' %>"></label>
+            <input class="file-input" name="file" id="file" type="file"  >
         </div>
 
-        <button class="submit-btn" type="submit">Upload</button>
-        <a href="/" class="cancel-btn">Cancel</a>
+        <div class="btn-group">
+            <a href="/" class="btn secondary">Cancel</a>
+            <button class="btn primary" type="submit">Upload</button>
+        </div>
         <% if(typeof errorList !== 'undefined' && errorList.length > 0) {%>
             <ul class="error-msgs">
                 <% errorList.forEach(e => { %>

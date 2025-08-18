@@ -1,17 +1,19 @@
 <%- include("./partials/header") %>
 
 <div class="form-container">
-    <form action="/create-folder" method="POST" > 
+    <form class="form-contents" action="/create-folder" method="POST" > 
 
-        <h1 class="form-heading">Create Folder</h1>
+        <h1 class="form-heading">New folder</h1>
         <div class="input-group">
-            <label for="folderName">Folder Name</label>
-            <input name="folderName" id="folderName" type="text" 
+            <label for="folderName"></label>
+            <input name="folderName" id="folderName" type="text" placeholder="Folder name"
              value="<% typeof folderName  !== "undefined" ? folderName : '' %>" />
         </div>
 
-        <button class="submit-btn" type="submit">Create Folder</button>
-        <a href="/" class="cancel-btn">Cancel</a>
+        <div class="btn-group">
+            <a href="/" class="btn secondary">Cancel</a>
+            <button class="btn primary" type="submit">Create Folder</button>
+        </div>
         
         <% if(typeof errorList !== 'undefined' && errorList.length > 0) {%>
             <ul class="error-msgs">
