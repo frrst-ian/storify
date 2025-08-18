@@ -95,7 +95,7 @@ a {
   --text: #fcfcfc;
   --text-2: #0b0b0b;
   --background: #030303;
-  --background-2:	#151516;
+  --background-2: #151516;
   --primary: #e6e6e6;
   --secondary: #248eff;
   --accent: #00ffcc;
@@ -115,7 +115,8 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  background-color: var(--background);
+  min-height: 90vh;
 }
 
 footer {
@@ -148,6 +149,16 @@ nav {
   background: var(--background);
 }
 
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-wrapper a {
+  margin-right: 20px;
+}
+
 hr {
   border: 1px solid #000000db;
 }
@@ -164,7 +175,7 @@ hr {
 
 section {
   display: flex;
-  height: 100vh;
+  min-height: 90vh;
 }
 
 nav {
@@ -191,11 +202,7 @@ div.main-wrapper,
   gap: 16px;
   margin-top: 20px;
   padding-left: 0;
-  color: #E5E9EB;
-}
-
-.nav-items > :last-child {
-  margin-top: 380px;
+  color: #e5e9eb;
 }
 
 .nav-item {
@@ -229,9 +236,9 @@ div.main-wrapper {
   padding: 40px 0px 0px 60px;
 }
 
-.folder-item a,.files-container  {
-
-  color: #CAD3D7;
+.folder-item a,
+.files-container {
+  color: #cad3d7;
 }
 
 .files-container {
@@ -389,17 +396,17 @@ hr.content-line {
 }
 
 button.del-btn {
-    color: #d93025;
-    background-color: var(--background);
-    border: none;
+  color: #d93025;
+  background-color: var(--background);
+  border: none;
 }
 
 .folder-header {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .folder-header h2 {

@@ -1,14 +1,16 @@
 <%- include('partials/header') %>
 
-<main>
-    <div class="container">
+<main class="details-wrapper">
+    <div class="file-details-wrapper form-contents">
         <% if(locals.user) { %> 
-            <p>File Name: <%=fileName%></p>
-            <p>File Size: <%=fileSize%> MB</p>
-            <p>File Type: <%=fileType%></p>
-            <p>Created At: <%=fileUploadDate%></p>
-            <a href="/">Back</a>
-            <a href="/download/<%=file.id%>">Download</a>
+            <p>File name: <%=fileName%></p>
+            <p>File size: <%=fileSize%> MB</p>
+            <p>File type: <%=fileType%></p>
+            <p>Created at: <%=fileUploadDate%></p>
+            <div class="btn-group">
+                <a class="btn secondary" href="/">Back</a>
+                <a class="btn primary" href="/download/<%=file.id%>">Download</a>
+            </div>
         <% } %>
     </div>
 </main>

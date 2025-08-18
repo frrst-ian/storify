@@ -105,7 +105,7 @@ ul.error-msgs {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 90vh;
   background-color: var(--background);
   color: var(--text);
 }
@@ -213,10 +213,13 @@ input#file {
 }
 
 .btn.primary {
-  background-color: #e1e1e1;
-  color: var(--text-2);
+    background-color: #e1e1e1;
+    color: var(--text-2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
-
 .btn.secondary {
   display: flex;
   align-items: center;
@@ -246,4 +249,35 @@ input#file {
 
 .form-contents {
   min-width: 300px;
+}
+
+select {
+    min-width: 100px;
+    padding: 5px 35px 5px 5px;
+    border: 2px solid #ccc;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: var(--rounding-normal);
+    margin: 10px;
+    background: url("../icons/chevron-down.svg")
+    96% / 15% no-repeat #eee;
+}
+
+.details-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}
+
+.file-details-wrapper{
+  color: var(--text);
+}
+
+.file-details-wrapper {
+    color: var(--text);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
