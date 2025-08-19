@@ -8,8 +8,6 @@ const session = require("express-session");
 const flash = require('connect-flash');
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const { PrismaClient } = require('./generated/prisma');
-const livereload = require("livereload");
-const connectLivereload = require("connect-livereload");
 
 // Authentication
 const passport = require('./config/passport');
@@ -26,20 +24,6 @@ const fileRouter = require("./routes/file");
 // App initialization
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-// Start LiveReload server watching public assets
-const liveReloadServer = livereload.createServer();
-liveReloadServer.watch(path.join(__dirname, 'public'));
-
-// Inject live-reload script into served pages
-app.use(connectLivereload());
-
-// Trigger browser reload when server restarts
-liveReloadServer.server.once("connection", () => {
-  setTimeout(() => {
-    liveReloadServer.refresh("/");
-  }, 100);
-});
 
 // View engine setup
 app.set("views", path.join(__dirname, "views"));
