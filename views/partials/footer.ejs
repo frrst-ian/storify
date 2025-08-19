@@ -52,6 +52,21 @@ document.addEventListener('click', function(event) {
         });
     }
 });
+
+// Auto-hide success messages after 3 seconds
+document.addEventListener('DOMContentLoaded', function() {
+    const successMessages = document.querySelectorAll('.success-msgs');
+    
+    successMessages.forEach(function(msgElement) {
+        // Add auto-hide class for animation
+        msgElement.classList.add('auto-hide');
+        
+        // Remove element after animation completes
+        setTimeout(function() {
+            msgElement.style.display = 'none';
+        }, 3000);
+    });
+});
 </script>
 </body>
 </html>
