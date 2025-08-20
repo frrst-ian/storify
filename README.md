@@ -23,8 +23,8 @@ Experience the live application: [https://storify-ymie.onrender.com/](https://st
 ## Design
 
 <div align='center'>
-<img src='./path/to/your/desktop.png' alt='Screenshot of desktop design - Main dashboard view'>
-<img src='../path/to/your/mobile.png' alt='Screenshot of mobile design - Responsive interface'>
+<img src='/public/desktop.png' alt='Screenshot of desktop design - Main dashboard view'>
+<img src='/public/mobile.png' alt='Screenshot of mobile design - Responsive interface'>
 </div>
 
 *The application features a clean, responsive design that adapts seamlessly across desktop and mobile devices, ensuring optimal user experience regardless of screen size.*
